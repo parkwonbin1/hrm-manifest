@@ -1,4 +1,4 @@
-# -------------------
+#-------------------
 # 1. PHP Backend
 # -------------------
 apiVersion: v1
@@ -29,8 +29,7 @@ spec:
         - name: regcred
       containers:
         - name: php
-          # [중요] 본인 ECR 주소인지 꼭 확인!
-          image: 361769563558.dkr.ecr.ap-northeast-2.amazonaws.com/hrm-repo:php
+          image: 789351387140.dkr.ecr.ap-northeast-2.amazonaws.com/hrm-project/php:latest
           imagePullPolicy: Always
           env:
             - name: DB_HOST
@@ -71,8 +70,7 @@ spec:
         - name: regcred
       containers:
         - name: nginx
-          # [중요] 본인 ECR 주소인지 꼭 확인!
-          image: 361769563558.dkr.ecr.ap-northeast-2.amazonaws.com/hrm-repo:nginx
+          image: 789351387140.dkr.ecr.ap-northeast-2.amazonaws.com/hrm-project/nginx:latest
           imagePullPolicy: Always
           ports:
             - containerPort: 8080

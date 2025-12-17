@@ -1,3 +1,38 @@
+# ==============================
+# 1. MariaDB 스토리지 설정 (PV & PVC)
+# ==============================
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: mariadb-pv
+spec:
+  capacity:
+    storage: 50Gi           # 👈 넉넉하게 50GB로 변경
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: manual  # 👈 "manual"이라는 이름표 부착
+  nfs:
+    # [수정필요] NFS 서버 IP 주소 입력
+    server: 192.168.XXX.XXX 
+    # [수정필요] NFS 서버 공유 경로 (DB용)
+    path: /nfs_share/hrm-project/mariadb 
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mariadb-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 50Gi         # 👈 PV랑 똑같이 50GB로 요청
+  storageClassName: manual  # 👈 PV랑 똑같은 이름표 (그래야 둘이 연결됨)
+
+---
+# ==============================
+# 2. MariaDB 서비스 & 배포
+# ==============================
 apiVersion: v1
 kind: Service
 metadata:
@@ -26,10 +61,51 @@ spec:
           image: mariadb:10.6
           env:
             - name: MARIADB_ROOT_PASSWORD
-              value: "soldesk5."  # db.php의 비밀번호와 일치
+              value: "soldesk5."
             - name: MARIADB_DATABASE
-              value: "hrm_db"     # db.php의 DB명과 일치
+              value: "hrm_db"
+          volumeMounts:
+            - mountPath: /var/lib/mysql
+              name: mariadb-storage
+      volumes:
+        - name: mariadb-storage
+          persistentVolumeClaim:
+            claimName: mariadb-pvc
+
 ---
+# ==============================
+# 3. MinIO 스토리지 설정 (PV & PVC)
+# ==============================
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: minio-pv
+spec:
+  capacity:
+    storage: 50Gi           
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: manual  
+  nfs:
+    server: 172.16.6.91
+    path: /boot
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: minio-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 50Gi         
+  storageClassName: manual  
+
+---
+# ==============================
+# 4. MinIO 서비스 & 배포
+# ==============================
 apiVersion: v1
 kind: Service
 metadata:
@@ -62,6 +138,13 @@ spec:
           args: ["server", "/data", "--console-address", ":9001"]
           env:
             - name: MINIO_ROOT_USER
-              value: "admin"      # minio.php 설정과 일치
+              value: "admin"
             - name: MINIO_ROOT_PASSWORD
-              value: "admin1234"  # minio.php 설정과 일치
+              value: "admin1234"
+          volumeMounts:
+            - mountPath: /data
+              name: minio-storage
+      volumes:
+        - name: minio-storage
+          persistentVolumeClaim:
+            claimName: minio-pvc

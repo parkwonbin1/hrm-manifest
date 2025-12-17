@@ -3,7 +3,6 @@ kind: Ingress
 metadata:
   name: hrm-ingress
   annotations:
-    # 세션 유지를 위한 설정 (로그인 안 풀리게)
     nginx.ingress.kubernetes.io/affinity: "cookie"
 spec:
   rules:
