@@ -1,0 +1,26 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: hrm-ingress
+  annotations:
+    # 세션 유지를 위한 설정 (로그인 안 풀리게)
+    nginx.ingress.kubernetes.io/affinity: "cookie"
+spec:
+  rules:
+    - http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: nginx-service
+                port:
+                  number: 8080
+          # MinIO 콘솔 접속용 (선택사항)
+          - path: /minio
+            pathType: Prefix
+            backend:
+              service:
+                name: minio-service
+                port:
+                  number: 9001
