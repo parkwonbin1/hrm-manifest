@@ -4,6 +4,7 @@ metadata:
   name: hrm-ingress
   annotations:
     nginx.ingress.kubernetes.io/affinity: "cookie"
+    argocd.argoproj.io/sync-wave: "2"
 spec:
   rules:
     - http:
