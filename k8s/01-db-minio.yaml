@@ -7,15 +7,13 @@ metadata:
   name: mariadb-pv
 spec:
   capacity:
-    storage: 50Gi           # 👈 넉넉하게 50GB로 변경
+    storage: 50Gi           
   accessModes:
     - ReadWriteOnce
-  storageClassName: manual  # 👈 "manual"이라는 이름표 부착
+  storageClassName: manual  
   nfs:
-    # [수정필요] NFS 서버 IP 주소 입력
-    server: 192.168.XXX.XXX 
-    # [수정필요] NFS 서버 공유 경로 (DB용)
-    path: /nfs_share/hrm-project/mariadb 
+    server: 172.16.6.91 
+    path: /home/registry/hrm-project/mariadb 
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -26,8 +24,8 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 50Gi         # 👈 PV랑 똑같이 50GB로 요청
-  storageClassName: manual  # 👈 PV랑 똑같은 이름표 (그래야 둘이 연결됨)
+      storage: 50Gi       
+  storageClassName: manual  
 
 ---
 # ==============================
@@ -88,7 +86,7 @@ spec:
   storageClassName: manual  
   nfs:
     server: 172.16.6.91
-    path: /boot
+    path: /home/registry/hrm-project/minio
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
