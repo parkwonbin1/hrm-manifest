@@ -66,22 +66,6 @@ spec:
 # 3. MinIO 스토리지 설정 (PV & PVC)
 # ==============================
 apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: minio-pv
-  annotations:
-    argocd.argoproj.io/sync-wave: "0"
-spec:
-  capacity:
-    storage: 50Gi           
-  accessModes:
-    - ReadWriteOnce
-  storageClassName: manual  
-  nfs:
-    server: 172.16.6.91
-    path: /home/registry/hrm-project/minio
----
-apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: minio-pvc
