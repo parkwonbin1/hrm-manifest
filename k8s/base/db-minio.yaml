@@ -14,7 +14,6 @@ spec:
   resources:
     requests:
       storage: 50Gi       
-  storageClassName: manual  
 
 ---
 # ==============================
@@ -75,7 +74,6 @@ spec:
   resources:
     requests:
       storage: 50Gi         
-  storageClassName: manual  
 
 ---
 # ==============================
