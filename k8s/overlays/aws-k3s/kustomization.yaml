@@ -1,0 +1,19 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+# [공통] 네임스페이스 지정
+namespace: hrm-project
+
+# [리소스 조합]
+# 1. 공통 Base 가져오기 (상위 폴더 2번 이동)
+# 2. AWS K3s 전용 PV(HostPath) 추가하기
+resources:
+  - ../../base
+  - pv-hostpath.yaml
+
+# [패치 적용]
+# 우리가 만든 수정사항들을 덮어쓰기 (순서는 상관없지만 가독성을 위해 나열)
+patchesStrategicMerge:
+  - storage-patch.yaml    # PVC에 StorageClass 추가
+  - deployment-patch.yaml # 레플리카 0개로 설정 & Env 변경
+  - ingress-patch.yaml    # Traefik용 Ingress 설정

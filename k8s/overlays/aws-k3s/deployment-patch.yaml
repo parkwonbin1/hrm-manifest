@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hrm-php
+spec:
+  replicas: 1
+  template:
+    spec:
+      containers:
+        - name: php
+          env:
+            - name: MINIO_PUBLIC_URL
+              value: "http://minio-service:9000/hrm-profile"
+---
+# -------------------------
+# 2. Nginx Frontend 패치
+# -------------------------
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hrm-nginx
+spec:
+  replicas: 1
