@@ -4,7 +4,6 @@ kind: Kustomization
 namespace: hrm-project
 
 resources:
-  - namespace.yaml
   - ../../base
 
 patches:
