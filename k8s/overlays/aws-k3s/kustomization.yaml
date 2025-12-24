@@ -6,9 +6,8 @@ namespace: hrm-project
 resources:
   - namespace.yaml
   - ../../base
-  - pv-hostpath.yaml
 
-patchesStrategicMerge:
-  - storage-patch.yaml    
-  - deployment-patch.yaml 
-  - ingress-patch.yaml    
+patches:
+  - path: storage-patch.yaml
+  - path: deployment-patch.yaml
+  - path: ingress-patch.yaml
