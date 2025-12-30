@@ -1,0 +1,39 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: mariadb-pv
+spec:
+  capacity:
+    storage: 50Gi
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: manual
+
+  # [원본] OKD / 온프레미스 NFS 기반
+  # nfs:
+  #   server: 172.16.6.91
+  #   path: /home/registry/hrm-project/mariadb
+
+  # [변경] K3s EC2 로컬 디스크 사용
+  hostPath:
+    path: /mnt/data/mariadb
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: minio-pv
+spec:
+  capacity:
+    storage: 50Gi
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: manual
+
+  # [원본] OKD / NFS 기반
+  # nfs:
+  #   server: 172.16.6.91
+  #   path: /home/registry/hrm-project/minio
+
+  # [변경] K3s EC2 로컬 디스크 사용
+  hostPath:
+    path: /mnt/data/minio
