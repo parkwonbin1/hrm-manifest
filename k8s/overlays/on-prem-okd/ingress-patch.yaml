@@ -4,7 +4,7 @@ metadata:
   name: hrm-ingress
 spec:
   rules:
-    - host: hrm.wonbin.com
+    - host: gunbin.shop
       http:
         paths:
           - path: /
