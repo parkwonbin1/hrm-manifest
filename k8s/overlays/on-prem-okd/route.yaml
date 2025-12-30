@@ -1,0 +1,16 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: nginx-service
+  namespace: hrm-project
+  annotations:
+    argocd.argoproj.io/sync-wave: "3"
+spec:
+  host: gunbin.shop
+  port:
+    targetPort: 8080
+  to:
+    kind: Service
+    name: nginx-service
+    weight: 100
+  wildcardPolicy: None

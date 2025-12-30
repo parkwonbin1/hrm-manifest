@@ -6,7 +6,8 @@ namespace: hrm-project
 resources:
   - ../../base
   - ecr-cronjob.yaml
+  - route.yaml
 
 patchesStrategicMerge:
   - storage-patch.yaml
-  - ingress-patch.yaml
+  - ingress-remove.yaml
