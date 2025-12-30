@@ -9,3 +9,4 @@ resources:
 
 patchesStrategicMerge:
   - storage-patch.yaml
+  - ingress-patch.yaml
