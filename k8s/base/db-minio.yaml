@@ -1,7 +1,6 @@
 # ==============================
 # 1. MariaDB 스토리지 설정 (PV & PVC)
 # ==============================
----
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
