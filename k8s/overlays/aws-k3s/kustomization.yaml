@@ -7,6 +7,6 @@ resources:
   - ../../base
 
 patches:
-  - path: storage-patch.yaml
   - path: deployment-patch.yaml
   - path: ingress-patch.yaml
+  - path: delete-local-db.yaml

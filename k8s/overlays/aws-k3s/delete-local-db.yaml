@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mariadb
+$patch: delete
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mariadb-service
+$patch: delete
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mariadb-pvc
+$patch: delete
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: minio
+$patch: delete
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: minio-service
+$patch: delete
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: minio-pvc
+$patch: delete
