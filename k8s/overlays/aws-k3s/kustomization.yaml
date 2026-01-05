@@ -52,3 +52,9 @@ patchesStrategicMerge:
     metadata:
       name: minio-pvc
     $patch: delete
+  - |-
+    apiVersion: v1
+    kind: ConfigMap
+    metadata:
+      name: mariadb-config
+    $patch: delete

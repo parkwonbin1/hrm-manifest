@@ -6,3 +6,4 @@ resources:
   - db-minio.yaml
   - app.yaml
   - ingress.yaml
+  - mariadb-config.yaml
