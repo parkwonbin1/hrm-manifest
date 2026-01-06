@@ -21,6 +21,7 @@ spec:
             - name: DB_NAME
               value: "hrm_db"
             - name: DB_PASS
+              value: null
               valueFrom:
                 secretKeyRef:
                   name: hrm-aws-secret
