@@ -36,12 +36,33 @@ spec:
           image: 789351387140.dkr.ecr.ap-northeast-2.amazonaws.com/hrm-project/php:latest
           imagePullPolicy: Always
           env:
-            - name: DB_HOST
+            - name: DB_READ_HOST
+              value: "mariadb-service"  # K8s 내부 서비스명
+            - name: DB_WRITE_HOST
               value: "mariadb-service"
+            - name: DB_USER
+              value: "admin"
+            - name: DB_PASS
+              value: "soldesk1."
+            - name: DB_NAME
+              value: "hrm_db"
             - name: MINIO_HOST
-              value: "minio-service"
+              value: "minio-service"    # K8s 내부 서비스명
+            - name: MINIO_PORT
+              value: "9000"
+            - name: MINIO_BUCKET
+              value: "hrm-profile"
+            - name: MINIO_ACCESS_KEY
+              value: "admin"
+            - name: MINIO_SECRET_KEY
+              value: "admin1234"
+            - name: STORAGE_MODE
+              value: "ONPREM"
             - name: MINIO_PUBLIC_URL
-              value: "http://localhost:9000/hrm-profile"
+              value: "http://172.16.6.143:9000/hrm-profile"
+
+            - name: AWS_S3_BUCKET_URL
+              value: ""
 ---
 # -------------------
 # 2. Nginx Frontend
