@@ -6,18 +6,18 @@ spec:
   replicas: 1
   template:
     spec:
-      containers:				
-	- name: php
+      containers:
+        - name: php
           env:
             # -----------------------------------------------------------
             # 1. [DB 설정] 읽기는 AWS(Aurora), 쓰기는 온프레미스(VPN)
             # -----------------------------------------------------------
             - name: DB_READ_HOST
-              value: "hrm-aurora.cluster-cn4ame8y0oyq.ap-northeast-2.rds.amazonaws.com" # AWS Aurora 엔드포인트
+              value: "hrm-aurora.cluster-cn4ame8y0oyq.ap-northeast-2.rds.amazonaws.com"
             - name: DB_WRITE_HOST
-              value: "172.16.6.141" 
+              value: "172.16.6.91"
             - name: DB_USER
-              value: "admin" 
+              value: "admin"
             - name: DB_NAME
               value: "hrm_db"
             - name: DB_PASS
@@ -29,8 +29,9 @@ spec:
             # -----------------------------------------------------------
             # 2. [MinIO 쓰기 설정] 업로드는 무조건 온프레미스로! (VPN)
             # -----------------------------------------------------------
+            # [중요] VPN IP가 143이 맞다면 143으로 수정하세요! (오타 주의)
             - name: MINIO_HOST
-              value: "172.16.6.91" # [중요] 온프레미스 MinIO IP (VPN)
+              value: "172.16.6.91"
             - name: MINIO_PORT
               value: "9000"
             - name: MINIO_BUCKET
@@ -42,18 +43,15 @@ spec:
 
             # -----------------------------------------------------------
             # 3. [Hybrid 읽기 전략] AWS 모드 활성화
-            #    STORAGE_MODE가 'AWS'면, PHP는 아래 S3 URL을 이미지 주소로 사용함
             # -----------------------------------------------------------
             - name: STORAGE_MODE
               value: "AWS"
             
-            # S3 버킷의 웹 접속 URL (버킷명 + 리전 + 경로)
-            # 'https://'는 PHP 코드에서 붙여주므로 뺍니다 (minio.php 로직 확인 必)
-            # 만약 minio.php에 "https://" . getenv(...) 로 되어있다면 아래처럼 도메인만 입력
+            # S3 버킷 주소 (https:// 제외)
             - name: AWS_S3_BUCKET_URL
               value: "hrm-bucket-soldesk.s3.ap-northeast-2.amazonaws.com/hrm-profile"
 
-            # AWS SDK용 인증 정보 (혹시 S3 직접 접근 시 필요할 수 있음)
+            # AWS 인증 정보
             - name: AWS_ACCESS_KEY_ID
               valueFrom:
                 secretKeyRef:
