@@ -33,7 +33,7 @@ spec:
         - name: regcred
       containers:
         - name: php
-          image: 789351387140.dkr.ecr.ap-northeast-2.amazonaws.com/hrm-project/php:latest
+          image: 789351387140.dkr.ecr.ap-northeast-2.amazonaws.com/hrm-project/php:$(params.IMAGE_TAG)
           imagePullPolicy: Always
           env:
             - name: DB_READ_HOST
@@ -99,7 +99,7 @@ spec:
         - name: regcred
       containers:
         - name: nginx
-          image: 789351387140.dkr.ecr.ap-northeast-2.amazonaws.com/hrm-project/nginx:latest
+          image: 789351387140.dkr.ecr.ap-northeast-2.amazonaws.com/hrm-project/nginx:$(params.IMAGE_TAG)
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
