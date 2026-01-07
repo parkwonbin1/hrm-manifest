@@ -51,7 +51,7 @@ spec:
             - name: MINIO_PORT
               value: "9000"
             - name: MINIO_BUCKET
-              value: "hrm-profile"
+              value: "hrm-bucket-soldesk"
             - name: MINIO_ACCESS_KEY
               value: "admin"
             - name: MINIO_SECRET_KEY
@@ -59,7 +59,7 @@ spec:
             - name: STORAGE_MODE
               value: "ONPREM"
             - name: MINIO_PUBLIC_URL
-              value: "http://172.16.6.143:9000/hrm-profile"
+              value: "http://172.16.6.91:9000"
 
             - name: AWS_S3_BUCKET_URL
               value: ""

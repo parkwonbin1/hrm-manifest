@@ -36,7 +36,7 @@ spec:
             - name: MINIO_PORT
               value: "9000"
             - name: MINIO_BUCKET
-              value: "hrm-profile"
+              value: "hrm-bucket-soldesk"
             - name: MINIO_ACCESS_KEY
               value: "admin"
             - name: MINIO_SECRET_KEY
@@ -50,7 +50,7 @@ spec:
             
             # S3 버킷 주소 (https:// 제외)
             - name: AWS_S3_BUCKET_URL
-              value: "hrm-bucket-soldesk.s3.ap-northeast-2.amazonaws.com/hrm-profile"
+              value: "hrm-bucket-soldesk.s3.ap-northeast-2.amazonaws.com"
 
             # AWS 인증 정보
             - name: AWS_ACCESS_KEY_ID
