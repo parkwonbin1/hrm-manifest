@@ -26,6 +26,8 @@ spec:
                 secretKeyRef:
                   name: hrm-aws-secret
                   key: db-password
+            - name: DB_PORT
+              value: "30306"
 
             # -----------------------------------------------------------
             # 2. [MinIO 쓰기 설정] 업로드는 무조건 온프레미스로! (VPN)
