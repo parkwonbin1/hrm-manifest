@@ -43,6 +43,8 @@ spec:
           image: 789351387140.dkr.ecr.ap-northeast-2.amazonaws.com/hrm-project/php:latest
           imagePullPolicy: Always
           env:
+            - name: DB_PORT
+              value: "3306"
             - name: CLUSTER_ENV
               value: "ONPREM"
             - name: DB_READ_HOST
