@@ -44,6 +44,8 @@ spec:
           image: 789351387140.dkr.ecr.ap-northeast-2.amazonaws.com/hrm-project/php:latest
           imagePullPolicy: Always
           env:
+            - name: CLUSTER_ENV
+              value: "ONPREM"
             - name: DB_READ_HOST
               value: "mariadb-service"  # K8s 내부 서비스명
             - name: DB_WRITE_HOST
