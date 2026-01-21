@@ -1,10 +1,10 @@
-# 🚀 HRM 프로젝트: 하이브리드 클러스터 매니페스트 (GitOps)
+#  HRM 프로젝트: 하이브리드 클러스터 매니페스트 (GitOps)
 
 본 리포지토리는 **온프레미스(OKD)**와 **AWS 클라우드(K3s)**로 구성된 하이브리드 인프라의 모든 쿠버네티스 설정(Manifest)을 관리합니다. [cite_start]**ArgoCD**와 연동되어 GitOps 방식으로 멀티 클러스터 배포를 자동화합니다. [cite: 1, 2]
 
 ---
 
-## 🛠️ 주요 역할 및 특징
+##  주요 역할 및 특징
 
 ### 1. Kustomize 기반 멀티 클러스터 관리
 [cite_start]서로 다른 환경(On-prem vs Cloud)의 리소스 차이를 효율적으로 관리하기 위해 **Kustomize Overlay** 구조를 채택했습니다. 
@@ -23,15 +23,3 @@
 * [cite_start]**ECR Token Renewer**: AWS ECR 인증 정보(Secret)를 8시간마다 자동으로 갱신하는 CronJob 구현 [cite: 2]
 * [cite_start]**Sync-Wave 배포 제어**: DB → Storage → App 순서로 배포 우선순위를 지정하여 안정적인 서비스 기동 보장 [cite: 2]
 
----
-
-## 💡 핵심 트래픽슈팅: MariaDB-Aurora 복제 호환성
-[cite_start]하이브리드 동기화 과정에서 MariaDB 고유의 binlog 이벤트가 Aurora에서 해석되지 않아 복제가 중단되는 문제를 해결했습니다. 
-
-**[해결 코드 예시: `k8s/base/mariadb-config.yaml`]**
-```yaml
-# Aurora MySQL과의 호환성을 위해 MariaDB 전용 기능 비활성화
-binlog_annotate_row_events = OFF
-replicate_annotate_row_events = OFF
-binlog_checksum = NONE
-master_verify_checksum = OFF
