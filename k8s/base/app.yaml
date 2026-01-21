@@ -35,9 +35,7 @@ spec:
         - name: php
           livenessProbe:
             tcpSocket:
-              port: 9000     # PHP-FPM 포트가 아니라 Nginx를 통한다면 8080, 직통이면 설정 복잡함.
-                             # 보통 PHP 파드는 TCP 소켓 체크를 하거나, 
-                             # exec command로 체크하는 게 더 확실해.
+              port: 9000   
             initialDelaySeconds: 10
             periodSeconds: 10
           image: 789351387140.dkr.ecr.ap-northeast-2.amazonaws.com/hrm-project/php:latest
