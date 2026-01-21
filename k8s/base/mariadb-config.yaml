@@ -10,3 +10,10 @@ data:
     binlog_format=row
     bind-address=0.0.0.0
     expire_logs_days=7
+
+    # --- AWS Aurora MySQL 호환성을 위한 MariaDB 고유 기능 비활성화 ---
+    binlog_annotate_row_events = OFF
+    replicate_annotate_row_events = OFF
+    binlog_checksum = NONE
+    master_verify_checksum = OFF
+  
